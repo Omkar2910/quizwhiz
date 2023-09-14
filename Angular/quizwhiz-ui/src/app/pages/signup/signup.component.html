@@ -5,42 +5,65 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form class="registration-form">
+      <form class="registration-form" [formGroup]="signupForm" (ngSubmit)="formSubmit()">
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Enter your username" required>
+          <input formControlName="username" matInput placeholder="Enter your username">
+          <mat-error *ngIf="signupForm.get('username')?.hasError('required')">
+            Username is required.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>First Name</mat-label>
-          <input matInput placeholder="Enter your first name" required>
+          <input formControlName="firstName" matInput placeholder="Enter your first name">
+          <mat-error *ngIf="signupForm.get('firstName')?.hasError('required')">
+            First Name is required.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Last Name</mat-label>
-          <input matInput placeholder="Enter your last name" required>
+          <input formControlName="lastName" matInput placeholder="Enter your last name">
+          <mat-error *ngIf="signupForm.get('lastName')?.hasError('required')">
+            Last Name is required.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="Enter your email" required>
+          <input formControlName="email" matInput type="email" placeholder="Enter your email">
+          <mat-error *ngIf="signupForm.get('email')?.hasError('required')">
+            Email is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('email')?.hasError('email')">
+            Invalid email format.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Phone Number</mat-label>
-          <input matInput type="number" placeholder="Enter your phone number" required>
+          <input formControlName="phone" matInput type="number" placeholder="Enter your phone number">
+          <mat-error *ngIf="signupForm.get('phone')?.hasError('pattern')">
+            Invalid phone number format (only numeric characters are allowed).
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Enter your password" required>
+          <input formControlName="password" matInput type="password" placeholder="Enter your password">
+          <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+            Password is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">
+            Minimum length for password is 6
+          </mat-error>
         </mat-form-field>
 
         <div>
           <button mat-raised-button type="submit" color="primary" class="registration-button">Register</button>
-          <button mat-raised-button color="warn" class="registration-button">Clear</button>
+          <button mat-raised-button color="warn" class="registration-button" type="reset">Clear</button>
         </div>
-
       </form>
     </mat-card-content>
   </mat-card>

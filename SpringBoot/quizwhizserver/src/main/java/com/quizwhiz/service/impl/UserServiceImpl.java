@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     //creating user
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
-
+        user.setProfileImage("default.png");
         User local = userRepository.findByUsername(user.getUsername());
         if(local != null){
             System.out.println("User already exists");
