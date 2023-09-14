@@ -8,9 +8,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,7 @@ import { LoginComponent } from './pages/login/login.component';
     NavbarComponent,
     FooterComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,9 +29,12 @@ import { LoginComponent } from './pages/login/login.component';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

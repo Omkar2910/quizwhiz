@@ -16,6 +16,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:4200")
 public class UserController {
     @Autowired
     private UserService userService;
