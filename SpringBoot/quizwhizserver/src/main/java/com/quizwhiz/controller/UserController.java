@@ -41,7 +41,7 @@ public class UserController {
             User createdUser = userService.createUser(user, roles);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("User creation failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Signup failed: " + e.getMessage());
         }
     }
 

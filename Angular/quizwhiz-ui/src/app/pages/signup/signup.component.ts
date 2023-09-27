@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import necessary modules
-import { User } from 'src/app/models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,9 +9,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  signupForm: FormGroup; // Define a FormGroup
+  signupForm: FormGroup;
 
-  constructor(private userService: UserService, private fb: FormBuilder) {
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder,
+    private snakBar: MatSnackBar
+  ) {
     // Create the form group with validators
     this.signupForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -29,17 +33,26 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.valid) {
       // If the form is valid, submit the user object
       this.userService.addUser(this.signupForm.value).subscribe({
-        next: (data) => {
+        next: (data:any) => {
           console.log(data);
-          alert('Success');
+          // show snakbar
+          this.openSnakBar('Signup Successful', 'OK');
         },
         error: (error) => {
           console.error(error);
-          alert('Something went wrong');
+          this.openSnakBar(error.error, 'OK');
         },
       });
     } else {
-      alert('Please fill in the required fields correctly.');
+      this.openSnakBar('Please fill in the required fields correctly.', 'OK');
     }
+  }
+
+  openSnakBar(message: string, action: string) {
+    this.snakBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+    });
   }
 }

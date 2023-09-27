@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="login-title">Login to QuizWhiz</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="login-form" [formGroup]="signupForm">
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput placeholder="Enter your username*">
+          <mat-error *ngIf="signupForm.get('username')?.hasError('required')">
+            Username is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput type="password" placeholder="Enter your password*">
+          <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+            Password is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">
+            Minimum length for password is 6
+          </mat-error>
+        </mat-form-field>
+
+        <div>
+          <button mat-raised-button type="submit" color="primary" class="login-button">Login</button>
+          <button mat-raised-button color="warn" class="login-button" type="reset">Clear</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
